@@ -3,6 +3,8 @@ input = input_file.read()
 
 def addAllIfDuplicate(list, frac = None):
   #take a list of ints and sum the ones that are equal to the next one
+  #if frac is specified, will check against the digit that fraction of the length 
+  #of the list away, for these purposes even divisibility is assumed
   sum = 0
   length = len(list)
   step = length / frac if frac else 1
@@ -11,6 +13,7 @@ def addAllIfDuplicate(list, frac = None):
     if list[i] == list[(i+step)%length]:
       sum += list[i]
   return sum
+
 
 def splitStringByDigit(str):
   #turn a string of numbers into a list of each digit as an int
