@@ -27,22 +27,26 @@ def manhattan_distance_in_spiral(num):
     #increment left or up
     if (directions[curr_direction] == 'right'):
       left -= 1
-    elif (directions[curr_direction] == 'up'):
+    if (directions[curr_direction] == 'up'):
       up += 1
-    elif (directions[curr_direction] == 'left'):
+    if (directions[curr_direction] == 'left'):
       left += 1
-    elif (directions[curr_direction] == 'down'):
+    if (directions[curr_direction] == 'down'):
       up -= 1
 
     #if curr_dist_in_curr_direction == total_dist_in_curr_direction change directions
     if(curr_dist_in_curr_direction == total_dist_in_curr_direction):
       curr_direction = (curr_direction + 1) % 4
       curr_dist_in_curr_direction = 0
+      #if curr_direction is right or left, add one to total_dist_in_curr_direction
+      if(directions[curr_direction] == 'right' or directions[curr_direction] == 'left'):
+          total_dist_in_curr_direction += 1
 
-    #if curr_direction is right or left, add one to total_dist_in_curr_direction
-    if(directions[curr_direction] == 'right' or directions[curr_direction] == 'left'):
-      total_dist_in_curr_direction += 1
 
-    return abs(up) + abs(left)
+  return abs(up) + abs(left)
 
+print(manhattan_distance_in_spiral(1))
 print(manhattan_distance_in_spiral(12))
+print(manhattan_distance_in_spiral(23))
+print(manhattan_distance_in_spiral(1024))
+print(manhattan_distance_in_spiral(368078))
