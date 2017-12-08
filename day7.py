@@ -74,26 +74,25 @@ def collect_weights(base):
     return weights
 
 def maybe_this_is_what_part_2_is_looking_for(base):
-    # if (base.children is not None):
-        num_children = len(base.children)
-        #find odd child out
-        odd_child_out = None
-        normal_child = None
-        for i in range(num_children):
-            curr_child = program_nodes[base.children[i]]
-            next_child = program_nodes[base.children[(i + 1) % num_children]]
-            next_next_child = program_nodes[base.children[(i + 2) % num_children]]
-            if (curr_child.total_weight != next_child.total_weight and next_child.total_weight == next_next_child.total_weight):
-                odd_child_out = curr_child
-                normal_child = next_child
-        if (odd_child_out is not None):
-            #is this the level where the weights are wonky?
-            if (odd_child_out.weight != normal_child.weight):
-                goal_weight = normal_child.total_weight
-                odd_child_children_weight = odd_child_out.total_weight - odd_child_out.weight
-                return goal_weight - odd_child_children_weight
-            else:
-                return maybe_this_is_what_part_2_is_looking_for(odd_child_out)
+    num_children = len(base.children)
+    #find odd child out
+    odd_child_out = None
+    normal_child = None
+    for i in range(num_children):
+        curr_child = program_nodes[base.children[i]]
+        next_child = program_nodes[base.children[(i + 1) % num_children]]
+        next_next_child = program_nodes[base.children[(i + 2) % num_children]]
+        if (curr_child.total_weight != next_child.total_weight and next_child.total_weight == next_next_child.total_weight):
+            odd_child_out = curr_child
+            normal_child = next_child
+    if (odd_child_out is not None):
+        #is this the level where the weights are wonky?
+        if (odd_child_out.weight != normal_child.weight or odd_child_out.children is None):
+            goal_weight = normal_child.total_weight
+            odd_child_children_weight = odd_child_out.total_weight - odd_child_out.weight
+            return goal_weight - odd_child_children_weight
+        else:
+            return maybe_this_is_what_part_2_is_looking_for(odd_child_out)
 
     #find odd one out
     #if direct child node has different weight than sibling, return that child's weight + 5
