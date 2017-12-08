@@ -32,6 +32,9 @@ def find_largest_register(registers):
 
 def run_all_commands(inputs):
     registers = build_registers_from_input(inputs)
+    #part 2 ~~~
+    max = None
+    #~~ part 2
     for input in inputs:
         pattern = re.compile('([a-z]+) ([a-z]+) ([-\d]+) if ([a-z]+)(.+)')
         parsed_input = pattern.match(input)
@@ -52,6 +55,12 @@ def run_all_commands(inputs):
                     #do correct operation
                     register = registers[name_of_register_to_change]
                     register[change_method](change_amount)
-    return find_largest_register(registers)
+                    #part 2 ~~~
+                    if (max is None or register.value > max):
+                        max = register.value
+    return max
+    #~~part 2
+    #part1: 
+    #return find_largest_register(registers)
 
 print(run_all_commands(input))
