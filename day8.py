@@ -33,7 +33,7 @@ def find_largest_register(registers):
 def run_all_commands(inputs):
     registers = build_registers_from_input(inputs)
     for input in inputs:
-        pattern = re.compile('([a-z]+) ([a-z]+) (\d+) if ([a-z]+)(.+)')
+        pattern = re.compile('([a-z]+) ([a-z]+) ([-\d]+) if ([a-z]+)(.+)')
         parsed_input = pattern.match(input)
         print(input)
         if (parsed_input is not None):
