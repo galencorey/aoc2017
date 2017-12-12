@@ -32,6 +32,18 @@ def gather_neighbors(proggy):
                 added.append(n)
 
     return neighbors
+# part 1
+# print(len(gather_neighbors(all_proggys['0'])))
 
-print(len(gather_neighbors(all_proggys['0'])))
-# print(all_proggys['0'])
+def count_groups(proggydict):
+    accounted_for = []
+    num_groups = 0
+    for name, proggy in proggydict.items():
+        if (name not in accounted_for):
+            accounted_for = accounted_for + gather_neighbors(proggy)
+            num_groups += 1
+    print(accounted_for)
+    return num_groups
+
+
+print(count_groups(all_proggys))
